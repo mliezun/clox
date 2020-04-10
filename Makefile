@@ -20,4 +20,4 @@ $(ODIR)/%.o: $(SOURCEDIR)/%.c
 
 clean:
 	@rm -rf obj
-	@rm clox
+	@rm -f clox
