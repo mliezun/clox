@@ -6,6 +6,7 @@
 #ifdef CUSTOM_ALLOC
 
 #include <stdio.h>
+#include <errno.h>
 
 #define MINREQ 0x20000
 
