@@ -27,7 +27,7 @@ void initMemory()
                 free(memory);
             }
             printf("Cannot allocate enough memory\n");
-            exit(1);
+            exit(ENOMEM);
         }
         required >>= 1;
     }
@@ -66,6 +66,7 @@ struct block_meta *request_block(size_t size)
     struct block_meta *block = find_free_block(&last, size);
     if (block)
     {
+        block->free = 0;
         return block;
     }
     // Append new block to list
