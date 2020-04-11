@@ -2,8 +2,16 @@
 #include "chunk.h"
 #include "debug.h"
 
-int main(int argc, const char *argv[])
+#ifdef CUSTOM_ALLOC
+#include "memory.h"
+#endif
+
+int main()
 {
+#ifdef CUSTOM_ALLOC
+    initMemory();
+#endif
+
     Chunk chunk;
     initChunk(&chunk);
     int i;
@@ -15,6 +23,10 @@ int main(int argc, const char *argv[])
     writeChunk(&chunk, OP_RETURN, 123);
     disassembleChunk(&chunk, "test chunk");
     freeChunk(&chunk);
+
+#ifdef CUSTOM_ALLOC
+    freeMemory();
+#endif
 
     return 0;
 }
