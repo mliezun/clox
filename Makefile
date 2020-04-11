@@ -1,6 +1,6 @@
 CC = gcc
 HEADERDIR = inc
-CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Werror -DCUSTOM_ALLOC
+CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Werror
 
 ODIR = obj
 SOURCEDIR = src
