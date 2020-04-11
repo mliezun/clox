@@ -1,5 +1,5 @@
 CC = gcc
-HEADERDIR = headers
+HEADERDIR = inc
 CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Werror -DCUSTOM_ALLOC
 
 ODIR = obj
