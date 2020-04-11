@@ -1,6 +1,6 @@
 CC = gcc
 HEADERDIR = inc
-CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Werror
+CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Werror -Wno-sequence-point
 
 ODIR = obj
 SOURCEDIR = src
