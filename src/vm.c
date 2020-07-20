@@ -59,6 +59,12 @@ Value pop()
     return *vm.stackTop;
 }
 
+Value popn(int n)
+{
+    vm.stackTop -= n;
+    return *vm.stackTop;
+}
+
 static Value peek(int distance)
 {
     return vm.stackTop[-1 - distance];
@@ -145,6 +151,23 @@ static InterpretResult run()
         case OP_POP:
             pop();
             break;
+        case OP_POPN:
+            popn(READ_BYTE());
+            break;
+
+        case OP_GET_LOCAL:
+        {
+            uint8_t slot = READ_BYTE();
+            push(vm.stack[slot]);
+            break;
+        }
+
+        case OP_SET_LOCAL:
+        {
+            uint8_t slot = READ_BYTE();
+            vm.stack[slot] = peek(0);
+            break;
+        }
 
         case OP_GET_GLOBAL:
         {

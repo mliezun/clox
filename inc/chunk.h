@@ -7,11 +7,12 @@
 typedef enum
 {
     OP_CONSTANT,
-    OP_CONSTANT_LONG,
     OP_NIL,
     OP_TRUE,
     OP_FALSE,
     OP_POP,
+    OP_GET_LOCAL,
+    OP_SET_LOCAL,
     OP_GET_GLOBAL,
     OP_DEFINE_GLOBAL,
     OP_SET_GLOBAL,
@@ -26,6 +27,11 @@ typedef enum
     OP_NEGATE,
     OP_PRINT,
     OP_RETURN,
+
+    // Custom clox opcodes added to the end
+    // This is to maintain compatibility with other lox implementations
+    OP_CONSTANT_LONG,
+    OP_POPN,
 } OpCode;
 
 typedef struct
