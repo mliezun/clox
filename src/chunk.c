@@ -59,17 +59,25 @@ int addConstant(Chunk *chunk, Value value)
     return chunk->constants.count - 1;
 }
 
-void writeConstant(Chunk *chunk, Value value, int line)
+void writeConstant(Chunk *chunk, Value value, uint8_t byte, int line)
 {
     int constant = addConstant(chunk, value);
     if (constant <= UINT8_MAX)
     {
-        writeChunk(chunk, OP_CONSTANT, line);
+        writeChunk(chunk, byte, line);
         writeChunk(chunk, constant, line);
     }
     else
     {
-        writeChunk(chunk, OP_CONSTANT_LONG, line);
+        if (byte == OP_CONSTANT)
+        {
+            byte = OP_CONSTANT_LONG;
+        }
+        else
+        {
+            byte = OP_CLOSURE_LONG;
+        }
+        writeChunk(chunk, byte, line);
         writeChunk(chunk, constant >> 16, line);
         writeChunk(chunk, constant >> 8, line);
         writeChunk(chunk, constant, line);

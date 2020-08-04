@@ -16,6 +16,8 @@ typedef enum
     OP_GET_GLOBAL,
     OP_DEFINE_GLOBAL,
     OP_SET_GLOBAL,
+    OP_GET_UPVALUE,
+    OP_SET_UPVALUE,
     OP_EQUAL,
     OP_GREATER,
     OP_LESS,
@@ -30,12 +32,15 @@ typedef enum
     OP_JUMP_IF_FALSE,
     OP_LOOP,
     OP_CALL,
+    OP_CLOSE_UPVALUE,
+    OP_CLOSURE,
     OP_RETURN,
 
     // Custom clox opcodes added to the end
     // This is to maintain compatibility with other lox implementations
     OP_CONSTANT_LONG,
-    OP_POPN,
+    OP_CLOSURE_LONG,
+    OP_POPN
 } OpCode;
 
 typedef struct
@@ -54,6 +59,6 @@ void initChunk(Chunk *chunk);
 void freeChunk(Chunk *chunk);
 void writeChunk(Chunk *chunk, uint8_t byte, int line);
 int addConstant(Chunk *chunk, Value value);
-void writeConstant(Chunk *chunk, Value value, int line);
+void writeConstant(Chunk *chunk, Value value, uint8_t byte, int line);
 
 #endif
