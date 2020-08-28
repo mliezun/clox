@@ -1,7 +1,6 @@
 CC = gcc
 HEADERDIR = inc
 CFLAGS = -I./$(HEADERDIR) -Wall -Wextra -Wno-sequence-point #-Werror 
-DEBUGFLAGS = -ggdb3 -O0
 
 ODIR = obj
 SOURCEDIR = src
@@ -13,11 +12,17 @@ BINARY = clox
 
 $(shell mkdir -p obj)
 
+all: CFLAGS += -O3
+all: $(BINARY)
+
+debug: CFLAGS += -ggdb3 -O0 -DDEBUG_PRINT_CODE -DDEBUG_TRACE_EXECUTION -DDEBUG_STRESS_GC -DDEBUG_LOG_GC
+debug: $(BINARY)
+
 $(BINARY): $(OBJECTS)
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) $(OBJECTS) -o $(BINARY)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(BINARY)
 
 $(ODIR)/%.o: $(SOURCEDIR)/%.c
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf obj
