@@ -18,6 +18,9 @@ all: $(BINARY)
 debug: CFLAGS += -ggdb3 -O0 -DDEBUG_PRINT_CODE -DDEBUG_TRACE_EXECUTION -DDEBUG_STRESS_GC -DDEBUG_LOG_GC
 debug: $(BINARY)
 
+profile: CFLAGS += -g -O3
+profile: $(BINARY)
+
 $(BINARY): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(BINARY)
 
